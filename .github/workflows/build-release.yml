@@ -1,0 +1,47 @@
+# Percorso: .github/workflows/build-release.yml
+# ATTENZIONE: questo file va nel repository di DISTRIBUZIONE dedicato
+# (github.com/formalife/plugin-guida-al-soffocamento), non in claude-web.
+# claude-web è il workspace di coordinamento (più plugin insieme); questo repo
+# contiene solo questo plugin, alla radice — è il posto giusto per le Release che
+# WordPress deve vedere. Vedi claude-web/scripts/sync-plugin-release.sh per portare
+# qui il codice più recente prima di ogni rilascio.
+#
+# Cosa fa: ogni volta che pubblichi una Release su GitHub (non un semplice tag),
+# genera lo zip del plugin nel formato che Plugin Update Checker si aspetta
+# (guida-antipanico-soffocamento-vX.X.X.zip) e lo allega alla Release come asset.
+# Da quel momento il sito WordPress vede l'aggiornamento da solo, senza upload manuali.
+#
+# Non testato in questa sessione (non ho accesso al repository per farlo girare):
+# segue il pattern standard GitHub Actions + gh CLI, verificalo sulla prima release vera.
+
+name: Build e allega zip alla Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build-zip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del codice alla tag della release
+        uses: actions/checkout@v4
+
+      - name: Costruisci lo zip del plugin
+        run: |
+          mkdir -p /tmp/build/guida-antipanico-soffocamento
+          rsync -a --exclude='.git' --exclude='.github' \
+            ./ /tmp/build/guida-antipanico-soffocamento/
+          cd /tmp/build
+          zip -r "guida-antipanico-soffocamento-${{ github.event.release.tag_name }}.zip" guida-antipanico-soffocamento
+
+      - name: Allega lo zip alla Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" \
+            "/tmp/build/guida-antipanico-soffocamento-${{ github.event.release.tag_name }}.zip" \
+            --repo "${{ github.repository }}"
