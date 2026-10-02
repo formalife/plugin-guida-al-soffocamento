@@ -177,6 +177,12 @@ class GAPS_Stripe_Webhook {
 			return;
 		}
 
+		$event_registration_id = isset( $object['metadata']['wp_event_registration_id'] ) ? absint( $object['metadata']['wp_event_registration_id'] ) : 0;
+		if ( $event_registration_id && GAPS_Event_Registration::CPT === get_post_type( $event_registration_id ) ) {
+			GAPS_Event_Registration::process_payment_event( $type, $object );
+			return;
+		}
+
 		$post_id = isset( $object['metadata']['wp_preorder_id'] ) ? absint( $object['metadata']['wp_preorder_id'] ) : 0;
 		if ( ! $post_id || GAPS_Preorder::CPT !== get_post_type( $post_id ) ) {
 			return;
