@@ -3,7 +3,7 @@
  * Plugin Name:       Guida Anti-Panico al Soffocamento Pediatrico — Vendita libro
  * Plugin URI:         https://formalife.it
  * Description:        Landing page di vendita per "La Guida Anti-Panico al Soffocamento Pediatrico" (Formalife), con pagine "Condizioni di vendita", "Privacy", "Grazie — Ordine confermato" e "I tuoi numeri importanti" (scheda in omaggio, raggiungibile dal QR code stampato nel libro) generate automaticamente nello stesso stile. Popup d'acquisto con fatturazione facoltativa e pagamento Stripe integrato (Payment Element); nessuna email alla compilazione del modulo, email di ringraziamento al cliente e notifica interna separata solo a pagamento realmente confermato via webhook Stripe. Pannello impostazioni per immagini, colori, prezzo, date, dati statistici, dati legali/aziendali e link al corso pratico.
- * Version:             3.7.5
+ * Version:             3.8.0
  * Requires at least:   6.0
  * Requires PHP:        7.4
  * Author:              Formalife
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /* -----------------------------------------------------------------------
  * Costanti del plugin
  * ---------------------------------------------------------------------*/
-define( 'GAPS_VERSION', '3.7.5' );
+define( 'GAPS_VERSION', '3.8.0' );
 define( 'GAPS_PLUGIN_FILE', __FILE__ );
 define( 'GAPS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'GAPS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -70,6 +70,19 @@ define( 'GAPS_NUMERI_PAGE_ID_OPTION', 'gaps_numeri_page_id' );
 define( 'GAPS_CONFLICT_OPTION_NUMERI', 'gaps_page_conflict_numeri' );
 
 /* -----------------------------------------------------------------------
+ * Landing e thank-you page — Serata Anti-Panico / Giardino delle Fate.
+ * ---------------------------------------------------------------------*/
+define( 'GAPS_EVENT_SLUG', 'serata-antipanico-giardino-delle-fate' );
+define( 'GAPS_EVENT_PAGE_META', '_gaps_event_page' );
+define( 'GAPS_EVENT_PAGE_ID_OPTION', 'gaps_event_page_id' );
+define( 'GAPS_CONFLICT_OPTION_EVENT', 'gaps_page_conflict_event' );
+
+define( 'GAPS_EVENT_THANKYOU_SLUG', 'grazie-serata-antipanico' );
+define( 'GAPS_EVENT_THANKYOU_PAGE_META', '_gaps_event_thankyou_page' );
+define( 'GAPS_EVENT_THANKYOU_PAGE_ID_OPTION', 'gaps_event_thankyou_page_id' );
+define( 'GAPS_CONFLICT_OPTION_EVENT_THANKYOU', 'gaps_page_conflict_event_thankyou' );
+
+/* -----------------------------------------------------------------------
  * Aggiornamenti dal repository GitHub ufficiale.
  *
  * Plugin Update Checker e' incluso nel pacchetto: sul sito WordPress non
@@ -99,6 +112,7 @@ require_once GAPS_PLUGIN_DIR . 'includes/class-gaps-settings.php';
 require_once GAPS_PLUGIN_DIR . 'includes/class-gaps-page-manager.php';
 require_once GAPS_PLUGIN_DIR . 'includes/class-gaps-preorder.php';
 require_once GAPS_PLUGIN_DIR . 'includes/class-gaps-stripe-webhook.php';
+require_once GAPS_PLUGIN_DIR . 'includes/class-gaps-event-registration.php';
 require_once GAPS_PLUGIN_DIR . 'includes/class-gaps-assets.php';
 require_once GAPS_PLUGIN_DIR . 'includes/class-gaps-admin-notices.php';
 
@@ -118,6 +132,7 @@ function gaps_bootstrap() {
 	GAPS_Settings::init();
 	GAPS_Preorder::init();
 	GAPS_Stripe_Webhook::init();
+	GAPS_Event_Registration::init();
 	GAPS_Assets::init();
 	GAPS_Admin_Notices::init();
 }
