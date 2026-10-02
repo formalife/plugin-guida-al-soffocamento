@@ -77,7 +77,7 @@ class GAPS_Settings {
 		$output   = array();
 
 		// Immagini: solo ID interi validi.
-		foreach ( array( 'cover_image_id', 'camposarcone_image_id', 'admission_bg_image_id', 'guarantee_image_id', 'preview_image_1_id', 'preview_image_2_id', 'preview_image_3_id', 'preview_image_desktop_id', 'preview_image_mobile_id', 'formalife_logo_id', 'og_image_id', 'mechanism_key_image_id', 'final_floating_image_1_id', 'final_floating_image_2_id', 'final_floating_image_3_id', 'numeri_preview_image_id' ) as $key ) {
+		foreach ( array( 'cover_image_id', 'camposarcone_image_id', 'admission_bg_image_id', 'guarantee_image_id', 'preview_image_1_id', 'preview_image_2_id', 'preview_image_3_id', 'preview_image_desktop_id', 'preview_image_mobile_id', 'formalife_logo_id', 'og_image_id', 'mechanism_key_image_id', 'final_floating_image_1_id', 'final_floating_image_2_id', 'final_floating_image_3_id', 'numeri_preview_image_id', 'event_gallery_image_1_id', 'event_gallery_image_2_id', 'event_gallery_image_3_id', 'event_gallery_image_4_id' ) as $key ) {
 			$candidate      = isset( $input[ $key ] ) ? absint( $input[ $key ] ) : 0;
 			// L'ID deve appartenere a un allegato immagine valido: un ID
 			// che punta a un post cancellato, a un file non-immagine o a
@@ -105,7 +105,7 @@ class GAPS_Settings {
 		}
 
 		// Contenuti testuali semplici.
-		foreach ( array( 'price', 'shipping_price', 'date_closing', 'date_delivery' ) as $key ) {
+		foreach ( array( 'price', 'shipping_price', 'date_closing', 'date_delivery', 'event_title', 'event_partner', 'event_date', 'event_time', 'event_location', 'event_duration', 'event_price_single', 'event_price_couple' ) as $key ) {
 			$output[ $key ] = isset( $input[ $key ] ) ? sanitize_text_field( wp_unslash( $input[ $key ] ) ) : $defaults[ $key ];
 		}
 
@@ -351,6 +351,25 @@ class GAPS_Settings {
 						__( 'Immagine fluttuante 3 — sezione "Tra sei mesi..." (opzionale)', 'guida-antipanico-soffocamento' ),
 						__( 'PNG trasparente, formato quadrato consigliato (es. 300×300 px).', 'guida-antipanico-soffocamento' )
 					);
+					?>
+				</table>
+
+				<h2 class="title"><?php esc_html_e( 'Serata Anti-Panico — Giardino delle Fate', 'guida-antipanico-soffocamento' ); ?></h2>
+				<p class="description"><?php esc_html_e( 'Questi campi alimentano la landing dedicata all’evento del 24 novembre. I prezzi sono quelli già comunicati a questa struttura e restano separati dal prezzo della Guida.', 'guida-antipanico-soffocamento' ); ?></p>
+				<table class="form-table" role="presentation">
+					<tr><th scope="row"><label for="gaps_event_title"><?php esc_html_e( 'Titolo evento', 'guida-antipanico-soffocamento' ); ?></label></th><td><input type="text" id="gaps_event_title" name="<?php echo esc_attr( GAPS_OPTION_KEY ); ?>[event_title]" value="<?php echo esc_attr( $settings['event_title'] ); ?>" class="large-text" /></td></tr>
+					<tr><th scope="row"><label for="gaps_event_partner"><?php esc_html_e( 'Partner / struttura', 'guida-antipanico-soffocamento' ); ?></label></th><td><input type="text" id="gaps_event_partner" name="<?php echo esc_attr( GAPS_OPTION_KEY ); ?>[event_partner]" value="<?php echo esc_attr( $settings['event_partner'] ); ?>" class="regular-text" /></td></tr>
+					<tr><th scope="row"><label for="gaps_event_date"><?php esc_html_e( 'Data', 'guida-antipanico-soffocamento' ); ?></label></th><td><input type="text" id="gaps_event_date" name="<?php echo esc_attr( GAPS_OPTION_KEY ); ?>[event_date]" value="<?php echo esc_attr( $settings['event_date'] ); ?>" class="regular-text" /></td></tr>
+					<tr><th scope="row"><label for="gaps_event_time"><?php esc_html_e( 'Ora', 'guida-antipanico-soffocamento' ); ?></label></th><td><input type="text" id="gaps_event_time" name="<?php echo esc_attr( GAPS_OPTION_KEY ); ?>[event_time]" value="<?php echo esc_attr( $settings['event_time'] ); ?>" class="small-text" /></td></tr>
+					<tr><th scope="row"><label for="gaps_event_location"><?php esc_html_e( 'Luogo', 'guida-antipanico-soffocamento' ); ?></label></th><td><input type="text" id="gaps_event_location" name="<?php echo esc_attr( GAPS_OPTION_KEY ); ?>[event_location]" value="<?php echo esc_attr( $settings['event_location'] ); ?>" class="large-text" /></td></tr>
+					<tr><th scope="row"><label for="gaps_event_duration"><?php esc_html_e( 'Durata', 'guida-antipanico-soffocamento' ); ?></label></th><td><input type="text" id="gaps_event_duration" name="<?php echo esc_attr( GAPS_OPTION_KEY ); ?>[event_duration]" value="<?php echo esc_attr( $settings['event_duration'] ); ?>" class="regular-text" /></td></tr>
+					<tr><th scope="row"><label for="gaps_event_price_single"><?php esc_html_e( 'Prezzo singolo', 'guida-antipanico-soffocamento' ); ?></label></th><td><input type="text" id="gaps_event_price_single" name="<?php echo esc_attr( GAPS_OPTION_KEY ); ?>[event_price_single]" value="<?php echo esc_attr( $settings['event_price_single'] ); ?>" class="regular-text" /></td></tr>
+					<tr><th scope="row"><label for="gaps_event_price_couple"><?php esc_html_e( 'Prezzo coppia', 'guida-antipanico-soffocamento' ); ?></label></th><td><input type="text" id="gaps_event_price_couple" name="<?php echo esc_attr( GAPS_OPTION_KEY ); ?>[event_price_couple]" value="<?php echo esc_attr( $settings['event_price_couple'] ); ?>" class="regular-text" /></td></tr>
+					<?php
+					self::render_image_field( 'event_gallery_image_1_id', $settings['event_gallery_image_1_id'], __( 'Foto corso 1', 'guida-antipanico-soffocamento' ), __( 'Foto reale di un corso Formalife; formato orizzontale consigliato.', 'guida-antipanico-soffocamento' ) );
+					self::render_image_field( 'event_gallery_image_2_id', $settings['event_gallery_image_2_id'], __( 'Foto corso 2', 'guida-antipanico-soffocamento' ), __( 'Foto reale di un corso Formalife; formato orizzontale consigliato.', 'guida-antipanico-soffocamento' ) );
+					self::render_image_field( 'event_gallery_image_3_id', $settings['event_gallery_image_3_id'], __( 'Foto corso 3', 'guida-antipanico-soffocamento' ), __( 'Foto reale di un corso Formalife; formato orizzontale consigliato.', 'guida-antipanico-soffocamento' ) );
+					self::render_image_field( 'event_gallery_image_4_id', $settings['event_gallery_image_4_id'], __( 'Foto corso 4', 'guida-antipanico-soffocamento' ), __( 'Foto reale di un corso Formalife; formato orizzontale consigliato.', 'guida-antipanico-soffocamento' ) );
 					?>
 				</table>
 
