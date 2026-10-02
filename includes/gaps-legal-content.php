@@ -358,7 +358,7 @@ function gaps_render_privacy_content( $settings ) {
 	?>
 
 	<p class="gaps-legal-intro">
-		<?php esc_html_e( 'Questa informativa descrive come Formalife raccoglie, utilizza e protegge i dati personali di chi visita questo sito e di chi prenota una copia de "La Guida Anti-Panico al Soffocamento Pediatrico", in conformità al Regolamento (UE) 2016/679 ("GDPR") e al Codice in materia di protezione dei dati personali (D.Lgs. 196/2003, come modificato dal D.Lgs. 101/2018).', 'guida-antipanico-soffocamento' ); ?>
+		<?php esc_html_e( 'Questa informativa descrive come Formalife raccoglie, utilizza e protegge i dati personali di chi visita questo sito, acquista prodotti Formalife o si iscrive agli eventi e alle attività formative gestite tramite il sito, in conformità al Regolamento (UE) 2016/679 ("GDPR") e al Codice in materia di protezione dei dati personali (D.Lgs. 196/2003, come modificato dal D.Lgs. 101/2018).', 'guida-antipanico-soffocamento' ); ?>
 	</p>
 
 	<div class="gaps-legal-section">
@@ -370,7 +370,7 @@ function gaps_render_privacy_content( $settings ) {
 
 	<div class="gaps-legal-section">
 		<?php gaps_legal_heading( '2', 'dati-raccolti', __( 'Dati raccolti e come li raccogliamo', 'guida-antipanico-soffocamento' ) ); ?>
-		<p><?php esc_html_e( 'Raccogliamo solo i dati necessari a gestire la tua richiesta di prenotazione e il tuo acquisto:', 'guida-antipanico-soffocamento' ); ?></p>
+		<p><?php esc_html_e( 'Raccogliamo solo i dati necessari a gestire il tuo acquisto o la tua iscrizione a un evento:', 'guida-antipanico-soffocamento' ); ?></p>
 		<div class="gaps-legal-table-wrap">
 			<table class="gaps-legal-table">
 				<thead>
@@ -409,7 +409,7 @@ function gaps_render_privacy_content( $settings ) {
 				</tbody>
 			</table>
 		</div>
-		<p><?php esc_html_e( 'Il modulo di prenotazione prevede una casella per la presa visione della Privacy Policy. La casella “Voglio la fattura” non è un consenso di marketing: serve esclusivamente a mostrare i campi fiscali necessari. Il modulo non iscrive automaticamente ad alcuna newsletter o comunicazione promozionale.', 'guida-antipanico-soffocamento' ); ?></p>
+		<p><?php esc_html_e( 'I moduli di acquisto e di iscrizione agli eventi prevedono la presa visione della Privacy Policy. La casella “Voglio la fattura”, quando presente, non è un consenso di marketing: serve esclusivamente a mostrare i campi fiscali necessari. Nessun modulo iscrive automaticamente ad alcuna newsletter o comunicazione promozionale.', 'guida-antipanico-soffocamento' ); ?></p>
 	</div>
 
 	<div class="gaps-legal-section">
@@ -446,7 +446,7 @@ function gaps_render_privacy_content( $settings ) {
 
 	<div class="gaps-legal-section">
 		<?php gaps_legal_heading( '4', 'conferimento', __( 'Natura del conferimento dei dati', 'guida-antipanico-soffocamento' ) ); ?>
-		<p><?php esc_html_e( 'I dati di contatto e spedizione contrassegnati come obbligatori sono necessari per concludere ed eseguire il contratto di acquisto. I dati fiscali diventano obbligatori soltanto se selezioni “Voglio la fattura”; senza tali dati non potremo emettere la fattura richiesta, mentre non sono necessari quando la fattura non viene richiesta.', 'guida-antipanico-soffocamento' ); ?></p>
+		<p><?php esc_html_e( 'I dati di contatto contrassegnati come obbligatori sono necessari per gestire l'acquisto o l'iscrizione all'evento. I dati di spedizione sono richiesti solo quando necessari alla consegna di un prodotto; i dati fiscali diventano obbligatori soltanto se richiedi la fattura.', 'guida-antipanico-soffocamento' ); ?></p>
 	</div>
 
 	<div class="gaps-legal-section">
