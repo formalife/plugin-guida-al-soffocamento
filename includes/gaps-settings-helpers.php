@@ -38,6 +38,12 @@ function gaps_default_settings() {
 		'final_floating_image_2_id' => 0,
 		'final_floating_image_3_id' => 0,
 
+		// Foto reali dei corsi mostrate nella landing evento.
+		'event_gallery_image_1_id' => 0,
+		'event_gallery_image_2_id' => 0,
+		'event_gallery_image_3_id' => 0,
+		'event_gallery_image_4_id' => 0,
+
 		// Opacità e sfocatura sfondo sezione "damaging admission" (0-100 / px).
 		'admission_bg_opacity' => 15,
 		'admission_bg_blur'    => 4,
@@ -54,6 +60,16 @@ function gaps_default_settings() {
 		'shipping_price' => '2,90 €',
 		'date_closing'  => '14 agosto',
 		'date_delivery' => 'in 4-5 giorni lavorativi',
+
+		// Serata Anti-Panico partner-hosted — Giardino delle Fate.
+		'event_title'        => 'Serata Anti-Panico al Soffocamento Pediatrico',
+		'event_partner'      => 'Il Giardino delle Fate',
+		'event_date'         => '24 novembre 2026',
+		'event_time'         => '17:30',
+		'event_location'     => 'Il Giardino delle Fate — via Rizzardi 17, Concesio (BS)',
+		'event_duration'     => 'circa 2 ore',
+		'event_price_single' => '30,00 €',
+		'event_price_couple' => '40,00 €',
 
 		// Destinazione dopo l'invio del modulo di preordine.
 		'stripe_url' => '',
@@ -206,6 +222,26 @@ function gaps_get_shipping_cents() {
 
 	return (int) round( $value * 100 );
 }
+
+/**
+ * Restituisce il prezzo dell'iscrizione evento in centesimi. L'importo
+ * viene sempre ricalcolato lato server dalle impostazioni, così il browser
+ * non può decidere autonomamente quanto addebitare.
+ *
+ * @param string $ticket_type 'single' oppure 'couple'.
+ * @return int
+ */
+function gaps_get_event_price_cents( $ticket_type = 'single' ) {
+	$settings = gaps_get_settings();
+	$key      = ( 'couple' === $ticket_type ) ? 'event_price_couple' : 'event_price_single';
+	$fallback = ( 'couple' === $ticket_type ) ? 4000 : 3000;
+	$raw      = isset( $settings[ $key ] ) ? (string) $settings[ $key ] : '';
+	$numeric  = preg_replace( '/[^0-9,\\.]/', '', $raw );
+	$numeric  = str_replace( ',', '.', $numeric );
+	$value    = (float) $numeric;
+	return $value > 0 ? (int) round( $value * 100 ) : $fallback;
+}
+
 
 /**
  * Restituisce le impostazioni salvate, unite ai valori di default per i campi mancanti.
@@ -610,6 +646,15 @@ function gaps_get_privacy_url() {
  */
 function gaps_get_thankyou_url() {
 	return GAPS_Page_Manager::get_page_url( 'thankyou' );
+}
+
+/**
+ * URL della pagina di conferma dedicata alle iscrizioni evento.
+ *
+ * @return string
+ */
+function gaps_get_event_thankyou_url() {
+	return GAPS_Page_Manager::get_page_url( 'event_thankyou' );
 }
 
 /**
