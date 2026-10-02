@@ -4,7 +4,7 @@ Tags: landing page, ecommerce, stripe, pediatria
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 3.7.5
+Stable tag: 3.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,19 +12,21 @@ Landing page di vendita per "La Guida Anti-Panico al Soffocamento Pediatrico" (F
 
 == Descrizione ==
 
-Il plugin genera automaticamente cinque pagine pubbliche, tutte con lo stesso design coerente:
+Il plugin genera automaticamente sette pagine pubbliche, incluse la landing dedicata alla Serata Anti-Panico del Giardino delle Fate e la relativa pagina di conferma:
 
 * `guida-antipanico-soffocamento` — la landing del libro con le sue 12+ sezioni.
 * `condizioni-di-vendita` — Condizioni di vendita complete (Codice del Consumo: recesso, garanzia legale di conformità, garanzia commerciale, pagamento, spedizione, responsabilità).
 * `privacy` — Privacy Policy conforme al GDPR (Regolamento UE 2016/679), personalizzata sui dati realmente raccolti dal modulo d'acquisto e sul flusso di pagamento Stripe.
 * `grazie-ordine-confermato` — pagina di ringraziamento post-pagamento: riepiloga l'ordine, spiega cosa succede adesso e propone, senza pressione, il passo successivo facoltativo verso il corso pratico "Genitori Pronti". Il cliente vi arriva in automatico dopo il pagamento (Stripe Payment Element, nessuna configurazione da fare su Stripe per questo passaggio).
 * `i-miei-numeri` — pagina raggiunta dal QR code stampato nelle ultime pagine del libro (pp. 157-158): permette il download gratuito, con un solo click e senza alcun modulo, della scheda PDF "I tuoi numeri importanti"; chiude, in una sezione separata e non invasiva, con una richiesta di recensione Google.
+* `serata-antipanico-giardino-delle-fate` — landing evento con introduzione, gallery di foto reali, FAQ, formule singolo/coppia e iscrizione con Stripe Payment Element.
+* `grazie-serata-antipanico` — pagina di conferma post-pagamento dell'iscrizione evento.
 
 Tutti gli elementi variabili (copertina, foto autrice, colori del brand, prezzo, date, dato statistico, sfondo sezione ammissione, immagine garanzia, anteprime del libro, PDF e anteprima della scheda "I tuoi numeri importanti", link recensione Google, contatti finali, link al corso pratico, dati legali/aziendali e link legali) sono configurabili dal pannello "Guida Anti-Panico" nel menu principale della bacheca. I dati legali non ancora compilati (ragione sociale, P.IVA, sede, PEC, ecc.) compaiono evidenziati in giallo direttamente sulle pagine pubbliche, come promemoria prima della pubblicazione definitiva.
 
 = Dove trovare le impostazioni =
 
-Bacheca WordPress → menu laterale "Guida Anti-Panico" (icona scudo). Gli ordini ricevuti si trovano nel sottomenu "Preordini ricevuti". In cima alla pagina impostazioni trovi gli URL di tutte e cinque le pagine pubbliche generate dal plugin, insieme a un promemoria a completare la configurazione del webhook Stripe (sezione "Notifiche e conferma di pagamento" più sotto): senza quella, i pagamenti riusciti non vengono mai segnati come "Pagato".
+Bacheca WordPress → menu laterale "Guida Anti-Panico" (icona scudo). Gli ordini ricevuti si trovano nel sottomenu "Preordini ricevuti". In cima alla pagina impostazioni trovi gli URL di tutte le pagine pubbliche generate dal plugin, insieme a un promemoria a completare la configurazione del webhook Stripe (sezione "Notifiche e conferma di pagamento" più sotto): senza quella, i pagamenti riusciti non vengono mai segnati come "Pagato".
 
 = Flusso di acquisto =
 
@@ -46,6 +48,15 @@ Se le chiavi Stripe non sono ancora configurate, il popup funziona comunque (il 
 5. Sempre nel pannello impostazioni, sezione "Notifiche e conferma di pagamento": copia l'URL dell'endpoint webhook mostrato lì, incollalo in Stripe → Sviluppatori → Webhook → Aggiungi endpoint (eventi: payment_intent.succeeded, payment_intent.payment_failed), poi incolla nel plugin la chiave segreta ("Signing secret") che Stripe ti mostra. Senza questo passaggio i pagamenti vanno comunque a buon fine, ma il plugin non può segnarli come "Pagato" né inviare le email di conferma.
 
 == Changelog ==
+
+= 3.8.0 =
+* Nuova landing dedicata alla Serata Anti-Panico del Giardino delle Fate (24 novembre 2026, ore 17:30), con contenuti evento, gallery configurabile dalla Libreria Media, FAQ e form di iscrizione.
+* Nuovo archivio amministrativo "Iscrizioni eventi", separato dai preordini della Guida.
+* Pagamento evento integrato nello stesso stack Stripe Payment Element già usato dal plugin: importo ricalcolato lato server, metadata dedicati e webhook condiviso con instradamento sicuro tra ordini libro e iscrizioni evento.
+* Prezzi evento configurabili dal pannello e inizializzati a 30 € singolo / 40 € coppia, coerenti con la proposta già inviata al Giardino delle Fate.
+* Email automatica al cliente e notifica interna solo dopo conferma reale del pagamento via webhook Stripe.
+* Le nuove pagine gestite vengono create anche dopo un normale aggiornamento del plugin, senza richiedere disattivazione/riattivazione.
+
 
 = 3.7.5 =
 * Corretto il modello di repository: `github.com/formalife/claude-web` (introdotto in 3.7.4) resta il workspace di coordinamento per tutti i plugin Formalife, ma la sorgente degli aggiornamenti automatici di questo plugin punta ora a un repository dedicato, `github.com/formalife/plugin-guida-al-soffocamento`, sincronizzato da `claude-web` ad ogni rilascio. Necessario perché Plugin Update Checker legge il changelog solo dalla radice del repository, e più plugin coordinati nello stesso repo di sviluppo ne avrebbero uno solo alla radice.
