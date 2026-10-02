@@ -122,7 +122,7 @@ $couple = gaps_get_event_price_cents( 'couple' );
 					<label><input type="radio" name="ticket_type" value="couple"><span><strong>Coppia</strong><b><?php echo esc_html( number_format_i18n( $couple / 100, 2 ) ); ?> €</b></span></label>
 				</fieldset>
 				<label id="gaps-event-second-participant-wrap" hidden>Nome e cognome del secondo partecipante<input name="second_participant" type="text" autocomplete="off"></label>
-				<label class="gaps-event-privacy"><input type="checkbox" name="privacy" value="1" required> <span>Ho letto l’<?php if ( $privacy_url ) : ?><a href="<?php echo esc_url( $privacy_url ); ?>" target="_blank" rel="noopener">informativa privacy</a><?php else : ?>informativa privacy<?php endif; ?> e acconsento al trattamento dei dati necessario a gestire l’iscrizione.</span></label>
+				<label class="gaps-event-privacy"><input type="checkbox" name="privacy" value="1" required> <span>Ho letto l’<?php if ( $privacy_url ) : ?><a href="<?php echo esc_url( $privacy_url ); ?>" target="_blank" rel="noopener">informativa privacy</a><?php else : ?>informativa privacy<?php endif; ?> e ne dichiaro la presa visione.</span></label>
 				<div class="gaps-event-total">Totale: <strong id="gaps-event-total"></strong></div>
 				<button type="button" id="gaps-event-continue" class="gaps-event-btn gaps-event-btn--full">Continua al pagamento</button>
 				<div id="gaps-event-payment-wrap" hidden>
