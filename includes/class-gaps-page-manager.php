@@ -20,6 +20,7 @@ class GAPS_Page_Manager {
 	public static function init() {
 		add_filter( 'template_include', array( __CLASS__, 'load_template' ) );
 		add_filter( 'display_post_states', array( __CLASS__, 'add_page_state' ), 10, 2 );
+		add_action( 'admin_init', array( __CLASS__, 'ensure_pages' ) );
 	}
 
 	/**
@@ -73,6 +74,26 @@ class GAPS_Page_Manager {
 				'state_label'     => __( 'Grazie (thank you) — Guida Anti-Panico', 'guida-antipanico-soffocamento' ),
 				'admin_label'     => __( 'Grazie — Ordine confermato', 'guida-antipanico-soffocamento' ),
 			),
+			'event' => array(
+				'slug'            => GAPS_EVENT_SLUG,
+				'title'           => __( 'Serata Anti-Panico — Giardino delle Fate', 'guida-antipanico-soffocamento' ),
+				'meta'            => GAPS_EVENT_PAGE_META,
+				'option'          => GAPS_EVENT_PAGE_ID_OPTION,
+				'conflict_option' => GAPS_CONFLICT_OPTION_EVENT,
+				'template'        => 'template-event.php',
+				'state_label'     => __( 'Landing evento — Formalife', 'guida-antipanico-soffocamento' ),
+				'admin_label'     => __( 'Landing evento Giardino delle Fate', 'guida-antipanico-soffocamento' ),
+			),
+			'event_thankyou' => array(
+				'slug'            => GAPS_EVENT_THANKYOU_SLUG,
+				'title'           => __( 'Iscrizione ricevuta — Serata Anti-Panico', 'guida-antipanico-soffocamento' ),
+				'meta'            => GAPS_EVENT_THANKYOU_PAGE_META,
+				'option'          => GAPS_EVENT_THANKYOU_PAGE_ID_OPTION,
+				'conflict_option' => GAPS_CONFLICT_OPTION_EVENT_THANKYOU,
+				'template'        => 'template-event-thankyou.php',
+				'state_label'     => __( 'Grazie iscrizione evento — Formalife', 'guida-antipanico-soffocamento' ),
+				'admin_label'     => __( 'Grazie — iscrizione evento', 'guida-antipanico-soffocamento' ),
+			),
 			'numeri'   => array(
 				'slug'            => GAPS_NUMERI_SLUG,
 				'title'           => __( 'I tuoi numeri importanti', 'guida-antipanico-soffocamento' ),
@@ -92,6 +113,20 @@ class GAPS_Page_Manager {
 	 * esistente non creata da questo plugin.
 	 */
 	public static function on_activation() {
+		foreach ( self::get_registry() as $def ) {
+			self::activate_single_page( $def );
+		}
+	}
+
+	/**
+	 * Dopo un aggiornamento il plugin non viene riattivato: assicura quindi
+	 * che eventuali nuove pagine introdotte da una versione successiva
+	 * vengano create anche senza ciclo disattiva/attiva.
+	 */
+	public static function ensure_pages() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 		foreach ( self::get_registry() as $def ) {
 			self::activate_single_page( $def );
 		}
