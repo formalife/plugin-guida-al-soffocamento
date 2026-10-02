@@ -209,6 +209,59 @@ class GAPS_Assets {
 			);
 
 			self::maybe_enqueue_meta_pixel();
+		} elseif ( 'event' === $page_key ) {
+			$settings = gaps_get_settings();
+
+			wp_enqueue_style(
+				'gaps-event',
+				GAPS_PLUGIN_URL . 'assets/css/event.css',
+				array( 'gaps-frontend' ),
+				GAPS_VERSION
+			);
+
+			wp_enqueue_script(
+				'gaps-stripe-loader',
+				GAPS_PLUGIN_URL . 'assets/js/gaps-stripe-loader.js',
+				array(),
+				GAPS_VERSION,
+				true
+			);
+			wp_script_add_data( 'gaps-stripe-loader', 'strategy', 'defer' );
+
+			wp_enqueue_script(
+				'gaps-event-registration',
+				GAPS_PLUGIN_URL . 'assets/js/event-registration.js',
+				array( 'gaps-stripe-loader' ),
+				GAPS_VERSION,
+				true
+			);
+			wp_script_add_data( 'gaps-event-registration', 'strategy', 'defer' );
+
+			wp_localize_script(
+				'gaps-event-registration',
+				'gapsEventFrontend',
+				array(
+					'ajaxUrl'              => admin_url( 'admin-ajax.php' ),
+					'action'               => GAPS_Event_Registration::AJAX_ACTION,
+					'nonce'                => wp_create_nonce( GAPS_Event_Registration::NONCE_ACTION ),
+					'stripePublishableKey' => $settings['stripe_publishable_key'],
+					'singlePriceCents'     => gaps_get_event_price_cents( 'single' ),
+					'couplePriceCents'     => gaps_get_event_price_cents( 'couple' ),
+					'thankYouUrl'          => gaps_get_event_thankyou_url(),
+					'i18n'                 => array(
+						'genericError'    => __( 'Qualcosa è andato storto. Riprova tra qualche istante.', 'guida-antipanico-soffocamento' ),
+						'validationError' => __( 'Controlla i campi obbligatori prima di continuare.', 'guida-antipanico-soffocamento' ),
+						'paying'          => __( 'Elaborazione del pagamento in corso…', 'guida-antipanico-soffocamento' ),
+					),
+				)
+			);
+		} elseif ( 'event_thankyou' === $page_key ) {
+			wp_enqueue_style(
+				'gaps-event',
+				GAPS_PLUGIN_URL . 'assets/css/event.css',
+				array( 'gaps-frontend' ),
+				GAPS_VERSION
+			);
 		} elseif ( in_array( $page_key, array( 'terms', 'privacy' ), true ) ) {
 			wp_enqueue_style(
 				'gaps-legal',
