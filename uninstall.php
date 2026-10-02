@@ -65,6 +65,21 @@ if ( $numeri_page_id ) {
 delete_option( $gaps_numeri_page_id_option );
 delete_option( $gaps_numeri_conflict_option );
 
+// Landing evento e pagina di conferma evento (v3.8.0).
+foreach (
+	array(
+		array( 'gaps_event_page_id', '_gaps_event_page', 'gaps_page_conflict_event' ),
+		array( 'gaps_event_thankyou_page_id', '_gaps_event_thankyou_page', 'gaps_page_conflict_event_thankyou' ),
+	) as $event_page
+) {
+	$event_page_id = (int) get_option( $event_page[0] );
+	if ( $event_page_id && get_post_meta( $event_page_id, $event_page[1], true ) ) {
+		wp_delete_post( $event_page_id, true );
+	}
+	delete_option( $event_page[0] );
+	delete_option( $event_page[2] );
+}
+
 // Ripulisci anche eventuali impostazioni multisite.
 if ( is_multisite() ) {
 	delete_site_option( $gaps_option_key );
