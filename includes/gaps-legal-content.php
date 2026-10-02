@@ -384,7 +384,7 @@ function gaps_render_privacy_content( $settings ) {
 					<tr>
 						<td><?php esc_html_e( 'Dati identificativi e di contatto', 'guida-antipanico-soffocamento' ); ?></td>
 						<td><?php esc_html_e( 'Nome, cognome, telefono, email', 'guida-antipanico-soffocamento' ); ?></td>
-						<td><?php esc_html_e( 'Modulo d\'acquisto ("Acquista ora")', 'guida-antipanico-soffocamento' ); ?></td>
+						<td><?php esc_html_e( 'Modulo d\'acquisto o modulo di iscrizione all\'evento', 'guida-antipanico-soffocamento' ); ?></td>
 					</tr>
 					<tr>
 						<td><?php esc_html_e( 'Dati di spedizione', 'guida-antipanico-soffocamento' ); ?></td>
@@ -424,7 +424,7 @@ function gaps_render_privacy_content( $settings ) {
 				</thead>
 				<tbody>
 					<tr>
-						<td><?php esc_html_e( 'Gestire la richiesta di prenotazione e concludere/eseguire il contratto di vendita (raccolta dell\'ordine, spedizione, fatturazione)', 'guida-antipanico-soffocamento' ); ?></td>
+						<td><?php esc_html_e( 'Gestire l\'acquisto di prodotti o l\'iscrizione e partecipazione a eventi Formalife, inclusi pagamento, comunicazioni organizzative, eventuale spedizione e fatturazione', 'guida-antipanico-soffocamento' ); ?></td>
 						<td><?php esc_html_e( 'Art. 6.1.b GDPR — misure precontrattuali ed esecuzione del contratto', 'guida-antipanico-soffocamento' ); ?></td>
 					</tr>
 					<tr>
@@ -446,7 +446,7 @@ function gaps_render_privacy_content( $settings ) {
 
 	<div class="gaps-legal-section">
 		<?php gaps_legal_heading( '4', 'conferimento', __( 'Natura del conferimento dei dati', 'guida-antipanico-soffocamento' ) ); ?>
-		<p><?php esc_html_e( 'I dati di contatto contrassegnati come obbligatori sono necessari per gestire l'acquisto o l'iscrizione all'evento. I dati di spedizione sono richiesti solo quando necessari alla consegna di un prodotto; i dati fiscali diventano obbligatori soltanto se richiedi la fattura.', 'guida-antipanico-soffocamento' ); ?></p>
+		<p><?php esc_html_e( 'I dati di contatto contrassegnati come obbligatori sono necessari per gestire l\'acquisto o l\'iscrizione all\'evento. I dati di spedizione sono richiesti solo quando necessari alla consegna di un prodotto; i dati fiscali diventano obbligatori soltanto se richiedi la fattura.', 'guida-antipanico-soffocamento' ); ?></p>
 	</div>
 
 	<div class="gaps-legal-section">
@@ -471,7 +471,7 @@ function gaps_render_privacy_content( $settings ) {
 						<td><?php esc_html_e( 'Per il tempo necessario a evadere l\'ordine e, successivamente, per il periodo previsto dalla normativa fiscale e civilistica (10 anni ai sensi dell\'art. 2220 del Codice Civile), poi cancellati o anonimizzati', 'guida-antipanico-soffocamento' ); ?></td>
 					</tr>
 					<tr>
-						<td><?php esc_html_e( 'Dati di richieste o prenotazioni non finalizzate all\'acquisto', 'guida-antipanico-soffocamento' ); ?></td>
+						<td><?php esc_html_e( 'Dati di richieste, ordini o iscrizioni non finalizzati al pagamento', 'guida-antipanico-soffocamento' ); ?></td>
 						<td><?php esc_html_e( 'Fino a 24 mesi dall\'ultimo contatto, salvo cancellazione anticipata su tua richiesta', 'guida-antipanico-soffocamento' ); ?></td>
 					</tr>
 					<tr>
@@ -538,7 +538,7 @@ function gaps_render_privacy_content( $settings ) {
 
 	<div class="gaps-legal-section">
 		<?php gaps_legal_heading( '12', 'minori', __( 'Minori', 'guida-antipanico-soffocamento' ) ); ?>
-		<p><?php esc_html_e( 'Il sito e l\'acquisto del libro si rivolgono a genitori e adulti maggiorenni. Non raccogliamo consapevolmente dati personali di minori attraverso il modulo di prenotazione, che richiede dati anagrafici e fiscali riferibili a un acquirente maggiorenne.', 'guida-antipanico-soffocamento' ); ?></p>
+		<p><?php esc_html_e( 'Il sito, gli acquisti e le iscrizioni agli eventi si rivolgono a genitori, caregiver e adulti maggiorenni. Non raccogliamo consapevolmente dati personali di minori tramite i moduli di acquisto o iscrizione.', 'guida-antipanico-soffocamento' ); ?></p>
 	</div>
 
 	<div class="gaps-legal-section">
